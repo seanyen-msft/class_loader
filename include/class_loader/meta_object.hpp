@@ -36,7 +36,6 @@
 #define CLASS_LOADER__META_OBJECT_HPP_
 
 #include <console_bridge/console.h>
-#include <ros/macros.h>
 #include "class_loader/visibility_control.hpp"
 
 #include <typeinfo>
@@ -57,73 +56,73 @@ typedef std::vector<class_loader::ClassLoader *> ClassLoaderVector;
  * @class AbstractMetaObjectBase
  * @brief A base class for MetaObjects that excludes a polymorphic type parameter. Subclasses are class templates though.
  */
-class CLASS_LOADER_PUBLIC AbstractMetaObjectBase
+class AbstractMetaObjectBase
 {
 public:
   /**
    * @brief Constructor for the class
    */
-  AbstractMetaObjectBase(const std::string & class_name, const std::string & base_class_name);
+  CLASS_LOADER_PUBLIC AbstractMetaObjectBase(const std::string & class_name, const std::string & base_class_name);
   /**
    * @brief Destructor for the class. THIS MUST NOT BE VIRTUAL AND OVERRIDDEN BY
    * TEMPLATE SUBCLASSES, OTHERWISE THEY WILL PULL IN A REDUNDANT METAOBJECT
    * DESTRUCTOR OUTSIDE OF libclass_loader WITHIN THE PLUGIN LIBRARY! T
    */
-  ~AbstractMetaObjectBase();
+  CLASS_LOADER_PUBLIC ~AbstractMetaObjectBase();
 
   /**
    * @brief Gets the literal name of the class.
    * @return The literal name of the class as a C-string.
    */
-  std::string className() const;
+  std::string CLASS_LOADER_PUBLIC className() const;
 
   /**
    * @brief gets the base class for the class this factory represents
    */
-  std::string baseClassName() const;
+  std::string CLASS_LOADER_PUBLIC baseClassName() const;
   /**
    * @brief Gets the name of the class as typeid(BASE_CLASS).name() would return it
    */
-  std::string typeidBaseClassName() const;
+  std::string CLASS_LOADER_PUBLIC typeidBaseClassName() const;
 
   /**
    * @brief Gets the path to the library associated with this factory
    * @return Library path as a std::string
    */
-  std::string getAssociatedLibraryPath();
+  std::string CLASS_LOADER_PUBLIC getAssociatedLibraryPath();
 
   /**
    * @brief Sets the path to the library associated with this factory
    */
-  void setAssociatedLibraryPath(std::string library_path);
+  void CLASS_LOADER_PUBLIC setAssociatedLibraryPath(std::string library_path);
 
   /**
    * @brief Associates a ClassLoader owner with this factory,
    * @param loader Handle to the owning ClassLoader.
    */
-  void addOwningClassLoader(ClassLoader * loader);
+  void CLASS_LOADER_PUBLIC addOwningClassLoader(ClassLoader * loader);
 
   /**
    * @brief Removes a ClassLoader that is an owner of this factory
    * @param loader Handle to the owning ClassLoader.
    */
-  void removeOwningClassLoader(const ClassLoader * loader);
+  void CLASS_LOADER_PUBLIC removeOwningClassLoader(const ClassLoader * loader);
 
   /**
    * @brief Indicates if the factory is within the usable scope of a ClassLoader
    * @param loader Handle to the owning ClassLoader.
    */
-  bool isOwnedBy(const ClassLoader * loader);
+  bool CLASS_LOADER_PUBLIC isOwnedBy(const ClassLoader * loader);
 
   /**
    * @brief Indicates if the factory is within the usable scope of any ClassLoader
    */
-  bool isOwnedByAnybody();
+  bool CLASS_LOADER_PUBLIC isOwnedByAnybody();
 
   /**
    * A vector of class loaders that own this metaobject
    */
-  ClassLoaderVector getAssociatedClassLoaders();
+  ClassLoaderVector CLASS_LOADER_PUBLIC getAssociatedClassLoaders();
 
 protected:
   /**
